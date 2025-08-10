@@ -25,6 +25,9 @@ class Settings(BaseSettings):
     # Admin
     ADMIN_API_KEY: str | None = None
 
+    # Clerk (optional, for verifying session JWTs later)
+    CLERK_JWKS_URL: str | None = None
+
 
 settings = Settings()
 

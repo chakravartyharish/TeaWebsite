@@ -8,9 +8,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }){
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="min-h-screen bg-tea-cream text-[#1b1b1b]">
+        <body className="min-h-screen bg-gradient-to-br from-green-50 via-tea-cream to-green-100 text-[#1b1b1b]">
           <Header />
-          <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+          <main className="min-h-screen">{children}</main>
           <Footer />
           <Chatbot />
         </body>

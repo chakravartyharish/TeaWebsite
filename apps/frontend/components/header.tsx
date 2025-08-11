@@ -8,7 +8,7 @@ export default function Header(){
           <a href="/" className="hover:text-tea-leaf">Home</a>
           <a href="/cart" className="hover:text-tea-leaf">Cart</a>
           <a href="/checkout" className="hover:text-tea-leaf">Checkout</a>
-          <a href="/admin/new-product" className="hover:text-tea-leaf">Admin</a>
+
           <SignedOut>
             <SignInButton mode="modal">
               <button className="ml-4 underline">Sign in</button>

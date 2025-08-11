@@ -4,6 +4,11 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 export const API_BASE = useMock ? '' : (process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000");
 
 function toUrl(path: string) {
+  // Special handling for AI chat - always use frontend API route
+  if (path.startsWith('/ai/chat')) {
+    return isServer ? `${SITE_URL}/api${path}` : `/api${path}`
+  }
+  
   if (useMock) {
     return isServer ? `${SITE_URL}/api${path}` : `/api${path}`
   }

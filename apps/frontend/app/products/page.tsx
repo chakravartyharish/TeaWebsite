@@ -4,109 +4,46 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CartItem, getCart, addItem, removeItem, getTotals } from '@/lib/cart';
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  benefits: string[];
-  inStock: boolean;
-  rating: number;
-  reviews: number;
-}
-
-
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: "A-ZEN Calm Blend",
-    description: "Hand crafted with 5 sacred herbs. Ancient wisdom for modern mind. Instant tea/latte mix for calm & focused mind + radiant skin.",
-    price: 249,
-    originalPrice: 299,
-    image: "/api/placeholder/300/300",
-    category: "Wellness Blend",
-    benefits: ["Reduces anxiety", "Improves focus", "Radiant skin", "Natural ingredients"],
-    inStock: true,
-    rating: 4.8,
-    reviews: 127
-  },
-  {
-    id: 2,
-    name: "Earl Grey Supreme",
-    description: "Premium Ceylon black tea infused with bergamot oil and cornflower petals. A classic with a luxurious twist.",
-    price: 399,
-    originalPrice: 449,
-    image: "/api/placeholder/300/300",
-    category: "Black Tea",
-    benefits: ["Rich antioxidants", "Energy boost", "Premium quality", "Classic flavor"],
-    inStock: true,
-    rating: 4.7,
-    reviews: 89
-  },
-  {
-    id: 3,
-    name: "Dragon Well Green",
-    description: "Delicate Chinese green tea with a sweet, nutty flavor. Hand-picked from the hills of Hangzhou.",
-    price: 329,
-    image: "/api/placeholder/300/300",
-    category: "Green Tea",
-    benefits: ["Metabolism boost", "Brain health", "Weight management", "Detox"],
-    inStock: true,
-    rating: 4.6,
-    reviews: 156
-  },
-  {
-    id: 4,
-    name: "Himalayan Gold",
-    description: "High-altitude oolong tea with complex floral notes. Grown in the pristine Himalayan mountains.",
-    price: 599,
-    originalPrice: 699,
-    image: "/api/placeholder/300/300",
-    category: "Oolong Tea",
-    benefits: ["Heart health", "Cholesterol control", "Premium quality", "Unique flavor"],
-    inStock: true,
-    rating: 4.9,
-    reviews: 73
-  },
-  {
-    id: 5,
-    name: "Chamomile Dreams",
-    description: "Soothing herbal blend with chamomile, lavender, and honey. Perfect for evening relaxation.",
-    price: 279,
-    image: "/api/placeholder/300/300",
-    category: "Herbal Tea",
-    benefits: ["Better sleep", "Stress relief", "Digestive health", "Caffeine-free"],
-    inStock: false,
-    rating: 4.5,
-    reviews: 94
-  }
-];
+import { getProducts, Product } from '@/lib/api';
 
 export default function ProductsPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [selectedQuantities, setSelectedQuantities] = useState<{[key: number]: number}>({});
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedQuantities, setSelectedQuantities] = useState<{[key: string]: number}>({});
   const [showCart, setShowCart] = useState(false);
 
-  // Load cart from localStorage on component mount
+  // Load cart from localStorage and fetch products on component mount
   useEffect(() => {
     setCart(getCart());
+    fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const productsData = await getProducts();
+      setProducts(productsData);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load products');
+      console.error('Error fetching products:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const addToCart = (product: Product) => {
     const quantity = selectedQuantities[product.id] || 1;
     
     // Add to centralized cart
     addItem({
-      variantId: product.id,
+      variantId: parseInt(product.id) || 1, // Convert string ID to number for cart system
       qty: quantity,
       name: product.name,
       priceInr: product.price,
-      productSlug: product.name.toLowerCase().replace(/\s+/g, '-')
+      productSlug: product.slug
     });
     
     // Update local state to reflect changes
@@ -120,7 +57,7 @@ export default function ProductsPage() {
     setTimeout(() => setShowCart(false), 2000);
   };
 
-  const updateQuantity = (productId: number, quantity: number) => {
+  const updateQuantity = (productId: string, quantity: number) => {
     setSelectedQuantities({ ...selectedQuantities, [productId]: quantity });
   };
 
@@ -225,16 +162,36 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl lg:text-5xl font-bold text-tea-forest mb-4">
-            Premium Tea Collection
-          </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-tea-forest mb-4">Premium Tea Collection</h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Discover our handcrafted selection of premium teas, each carefully sourced and blended for the perfect experience.
           </p>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-tea-forest"></div>
+            <p className="mt-4 text-gray-600">Loading premium teas...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="text-center py-12">
+            <div className="text-red-600 mb-4">⚠️ {error}</div>
+            <button 
+              onClick={fetchProducts}
+              className="bg-tea-forest text-white px-6 py-2 rounded-lg hover:bg-green-800 transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
+        )}
+
         {/* Products Grid */}
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+        {!loading && !error && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map(product => (
             <div key={product.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               {/* Product Image */}
@@ -242,12 +199,12 @@ export default function ProductsPage() {
                 <div className="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center">
                   <span className="text-6xl text-white font-bold">{product.name.charAt(0)}</span>
                 </div>
-                {product.originalPrice && (
+                {product.original_price && (
                   <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                    Save ₹{product.originalPrice - product.price}
+                    Save ₹{product.original_price - product.price}
                   </div>
                 )}
-                {!product.inStock && (
+                {!product.in_stock && (
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <span className="text-white font-bold text-xl">Out of Stock</span>
                   </div>
@@ -281,13 +238,13 @@ export default function ProductsPage() {
                 {/* Price */}
                 <div className="flex items-center space-x-2 mb-4">
                   <span className="text-2xl font-bold text-tea-forest">₹{product.price}</span>
-                  {product.originalPrice && (
-                    <span className="text-lg text-gray-500 line-through">₹{product.originalPrice}</span>
+                  {product.original_price && (
+                    <span className="text-lg text-gray-500 line-through">₹{product.original_price}</span>
                   )}
                 </div>
 
                 {/* Quantity and Add to Cart */}
-                {product.inStock ? (
+                {product.in_stock ? (
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center border border-gray-300 rounded-lg">
                       <button 

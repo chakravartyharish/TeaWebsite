@@ -2,6 +2,9 @@ from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 from app.models.mongo_models import Product, Category
 from bson import ObjectId
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/products", tags=["products"])
 
@@ -13,32 +16,51 @@ async def list_products(
     skip: int = Query(0, description="Skip number of results")
 ):
     """Get all products with optional filtering"""
-    query = {}
-    
-    if category:
-        query["category"] = category
-    if in_stock is not None:
-        query["in_stock"] = in_stock
-    
-    products = await Product.find(query).skip(skip).limit(limit).to_list()
-    
-    return [
-        {
-            "id": str(product.id),
-            "name": product.name,
-            "description": product.description,
-            "price": product.price,
-            "original_price": product.original_price,
-            "image": product.image,
-            "category": product.category,
-            "benefits": product.benefits,
-            "in_stock": product.in_stock,
-            "rating": product.rating,
-            "reviews": product.reviews,
-            "slug": product.slug
-        }
-        for product in products
-    ]
+    try:
+        logger.info(f"Starting list_products request with category={category}, in_stock={in_stock}")
+        
+        query = {}
+        
+        if category:
+            query["category"] = category
+        if in_stock is not None:
+            query["in_stock"] = in_stock
+        
+        logger.info(f"MongoDB query: {query}")
+        
+        # Add timeout and better error handling
+        products = await Product.find(query).skip(skip).limit(limit).to_list()
+        
+        logger.info(f"Successfully retrieved {len(products)} products from MongoDB")
+        
+        result = []
+        for product in products:
+            try:
+                product_dict = {
+                    "id": str(product.id),
+                    "name": product.name,
+                    "description": product.description,
+                    "price": product.price,
+                    "original_price": product.original_price,
+                    "image": product.image,
+                    "category": product.category,
+                    "benefits": product.benefits,
+                    "in_stock": product.in_stock,
+                    "rating": product.rating,
+                    "reviews": product.reviews,
+                    "slug": product.slug
+                }
+                result.append(product_dict)
+            except Exception as e:
+                logger.error(f"Error processing product {product.id}: {str(e)}")
+                continue
+        
+        logger.info(f"Successfully processed {len(result)} products for response")
+        return result
+        
+    except Exception as e:
+        logger.error(f"Error in list_products: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve products: {str(e)}")
 
 @router.get("/{product_id}", response_model=dict)
 async def get_product(product_id: str):

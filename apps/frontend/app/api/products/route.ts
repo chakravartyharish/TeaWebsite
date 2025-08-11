@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server'
 
+// This mock API route is no longer needed - using MongoDB backend
 export async function GET(){
-  return NextResponse.json([
-    { id: 1, slug: 'darjeeling-first-flush', name: 'Darjeeling First Flush', hero_image: 'https://picsum.photos/seed/tea1/800' },
-    { id: 2, slug: 'assam-ctc-strong', name: 'Assam CTC Strong', hero_image: 'https://picsum.photos/seed/tea2/800' },
-  ])
+  return NextResponse.json({ 
+    message: "This mock API is deprecated. Use MongoDB backend at /api/products/",
+    redirect: "http://localhost:8000/api/products/"
+  }, { status: 410 })
 }
 

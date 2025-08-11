@@ -1,0 +1,554 @@
+{
+  "_id": {
+    "$oid": "6899f863e76ec656ce965655"
+  },
+  "benefits": [
+    "Reduces anxiety",
+    "Improves focus",
+    "Radiant skin",
+    "Natural ingredients"
+  ],
+  "brew_temp_c": 80,
+  "brew_time_min": 3,
+  "category": "Wellness Blend",
+  "description": "Hand crafted with 5 sacred herbs. Ancient wisdom for modern mind. Instant tea/latte mix for calm & focused mind + radiant skin.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Sacred herbs blend with natural adaptogens including ashwagandha, brahmi, and tulsi",
+  "name": "A-ZEN Calm Blend",
+  "original_price": 299,
+  "price": 249,
+  "rating": 4.8,
+  "reviews": 127,
+  "slug": "a-zen-calm-blend",
+  "story": "Ancient wisdom meets modern wellness in this carefully crafted blend of sacred herbs.",
+  "variants": [
+    {
+      "id": 1,
+      "inventory_qty": 50,
+      "mrp_inr": 299,
+      "pack_size_g": 100,
+      "price_inr": 249,
+      "sku": "AZN-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "6899f863e76ec656ce965656"
+  },
+  "benefits": [
+    "Rich antioxidants",
+    "Energy boost",
+    "Classic flavor",
+    "Premium quality"
+  ],
+  "brew_temp_c": 95,
+  "brew_time_min": 4,
+  "category": "Black Tea",
+  "description": "Premium Ceylon black tea infused with bergamot oil and cornflower petals. A classic with a luxurious twist.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Ceylon black tea, natural bergamot oil, cornflower petals",
+  "name": "Earl Grey Supreme",
+  "original_price": 449,
+  "price": 399,
+  "rating": 4.7,
+  "reviews": 89,
+  "slug": "earl-grey-supreme",
+  "story": "A timeless classic elevated with premium Ceylon tea leaves and natural bergamot.",
+  "variants": [
+    {
+      "id": 2,
+      "inventory_qty": 30,
+      "mrp_inr": 449,
+      "pack_size_g": 100,
+      "price_inr": 399,
+      "sku": "EGS-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "6899f863e76ec656ce965657"
+  },
+  "benefits": [
+    "High antioxidants",
+    "Metabolism boost",
+    "Mental clarity",
+    "Traditional taste"
+  ],
+  "brew_temp_c": 75,
+  "brew_time_min": 2,
+  "category": "Green Tea",
+  "description": "Delicate Chinese green tea with a nutty flavor. Hand-picked from the hills of Hangzhou.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Premium Chinese green tea leaves (Longjing variety)",
+  "name": "Dragon Well Green",
+  "original_price": 379,
+  "price": 329,
+  "rating": 4.6,
+  "reviews": 156,
+  "slug": "dragon-well-green",
+  "story": "From the legendary tea gardens of Hangzhou comes this exquisite green tea with centuries of tradition.",
+  "variants": [
+    {
+      "id": 3,
+      "inventory_qty": 40,
+      "mrp_inr": 379,
+      "pack_size_g": 100,
+      "price_inr": 329,
+      "sku": "DWG-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "6899f871e76ec656ce965658"
+  },
+  "benefits": [
+    "Premium quality",
+    "Bold flavor",
+    "High altitude",
+    "Floral notes"
+  ],
+  "brew_temp_c": 95,
+  "brew_time_min": 5,
+  "category": "Black Tea",
+  "description": "High-altitude black tea from the Himalayas. Bold flavor with floral notes and golden liquor.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "High-altitude Himalayan black tea leaves",
+  "name": "Himalayan Gold",
+  "original_price": 509,
+  "price": 459,
+  "rating": 4.9,
+  "reviews": 203,
+  "slug": "himalayan-gold",
+  "story": "Grown at breathtaking altitudes in the Himalayas, this tea captures the pure essence of mountain terroir.",
+  "variants": [
+    {
+      "id": 4,
+      "inventory_qty": 25,
+      "mrp_inr": 509,
+      "pack_size_g": 100,
+      "price_inr": 459,
+      "sku": "HG-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "6899f871e76ec656ce965659"
+  },
+  "benefits": [
+    "Caffeine-free",
+    "Promotes sleep",
+    "Calming effect",
+    "Natural herbs"
+  ],
+  "brew_temp_c": 85,
+  "brew_time_min": 5,
+  "category": "Herbal Tea",
+  "description": "Soothing herbal blend perfect for bedtime. Naturally caffeine-free with calming properties.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Organic chamomile flowers, lavender, honey granules, lemon balm",
+  "name": "Chamomile Dreams",
+  "original_price": 319,
+  "price": 279,
+  "rating": 4.5,
+  "reviews": 94,
+  "slug": "chamomile-dreams",
+  "story": "Let the gentle embrace of chamomile and lavender guide you to peaceful, restorative sleep.",
+  "variants": [
+    {
+      "id": 5,
+      "inventory_qty": 35,
+      "mrp_inr": 319,
+      "pack_size_g": 100,
+      "price_inr": 279,
+      "sku": "CD-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01c9e76ec656ce96565a"
+  },
+  "benefits": [
+    "Complex flavor profile",
+    "Floral notes",
+    "Premium quality",
+    "Antioxidant rich"
+  ],
+  "brew_temp_c": 90,
+  "brew_time_min": 4,
+  "category": "Black Tea",
+  "description": "Exquisite Taiwanese oolong with complex floral notes and honey undertones. Hand-rolled leaves create a perfect golden brew.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Premium Taiwanese oolong tea leaves",
+  "name": "Royal Oolong Supreme",
+  "original_price": 699,
+  "price": 599,
+  "rating": 4.9,
+  "reviews": 156,
+  "slug": "royal-oolong-supreme",
+  "story": "From the high mountains of Taiwan comes this exceptional oolong, crafted by master tea artisans.",
+  "variants": [
+    {
+      "id": 6,
+      "inventory_qty": 20,
+      "mrp_inr": 699,
+      "pack_size_g": 100,
+      "price_inr": 599,
+      "sku": "ROS-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01c9e76ec656ce96565b"
+  },
+  "benefits": [
+    "Aromatic jasmine",
+    "Stress relief",
+    "Antioxidants",
+    "Evening relaxation"
+  ],
+  "brew_temp_c": 80,
+  "brew_time_min": 3,
+  "category": "Green Tea",
+  "description": "Hand-scented jasmine green tea rolled into beautiful pearls. Each pearl unfurls to release intoxicating jasmine fragrance.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Green tea pearls, natural jasmine flowers",
+  "name": "Jasmine Phoenix Pearls",
+  "original_price": 529,
+  "price": 459,
+  "rating": 4.8,
+  "reviews": 203,
+  "slug": "jasmine-phoenix-pearls",
+  "story": "Ancient Chinese tradition meets modern perfection in these hand-rolled jasmine tea pearls.",
+  "variants": [
+    {
+      "id": 7,
+      "inventory_qty": 30,
+      "mrp_inr": 529,
+      "pack_size_g": 50,
+      "price_inr": 459,
+      "sku": "JPP-50"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01c9e76ec656ce96565c"
+  },
+  "benefits": [
+    "Immunity boost",
+    "Anti-inflammatory",
+    "Natural healing",
+    "Caffeine free"
+  ],
+  "brew_temp_c": 85,
+  "brew_time_min": 5,
+  "category": "Wellness Blend",
+  "description": "Powerful herbal blend with turmeric, ginger, and echinacea. Perfect for boosting natural immunity and wellness.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Turmeric, ginger, echinacea, elderberry, honey granules",
+  "name": "Immunity Booster Blend",
+  "original_price": 399,
+  "price": 349,
+  "rating": 4.7,
+  "reviews": 145,
+  "slug": "immunity-booster-blend",
+  "story": "A carefully crafted wellness blend combining ancient herbs known for their healing properties.",
+  "variants": [
+    {
+      "id": 8,
+      "inventory_qty": 45,
+      "mrp_inr": 399,
+      "pack_size_g": 100,
+      "price_inr": 349,
+      "sku": "IBB-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01dee76ec656ce96565d"
+  },
+  "benefits": [
+    "Sleep aid",
+    "Relaxation",
+    "Stress relief",
+    "Aromatic mint"
+  ],
+  "brew_temp_c": 85,
+  "brew_time_min": 5,
+  "category": "Herbal Tea",
+  "description": "Soothing bedtime blend with organic lavender and fresh mint. Perfect for evening relaxation and peaceful sleep.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Organic lavender flowers, peppermint leaves, chamomile",
+  "name": "Lavender Mint Dreams",
+  "original_price": 339,
+  "price": 289,
+  "rating": 4.6,
+  "reviews": 178,
+  "slug": "lavender-mint-dreams",
+  "story": "A tranquil blend that combines the calming properties of lavender with refreshing mint.",
+  "variants": [
+    {
+      "id": 9,
+      "inventory_qty": 40,
+      "mrp_inr": 339,
+      "pack_size_g": 100,
+      "price_inr": 289,
+      "sku": "LMD-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01dee76ec656ce96565e"
+  },
+  "benefits": [
+    "Morning energy",
+    "Classic taste",
+    "Rich aroma",
+    "Perfect with milk"
+  ],
+  "brew_temp_c": 95,
+  "brew_time_min": 4,
+  "category": "Black Tea",
+  "description": "Classic English breakfast tea blend with robust Ceylon and Assam teas. Perfect morning companion with milk.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Ceylon black tea, Assam black tea, natural bergamot",
+  "name": "English Breakfast Royal",
+  "original_price": 439,
+  "price": 389,
+  "rating": 4.8,
+  "reviews": 267,
+  "slug": "english-breakfast-royal",
+  "story": "A traditional British blend that has been perfected over generations for the perfect morning cup.",
+  "variants": [
+    {
+      "id": 10,
+      "inventory_qty": 35,
+      "mrp_inr": 439,
+      "pack_size_g": 100,
+      "price_inr": 389,
+      "sku": "EBR-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01dee76ec656ce96565f"
+  },
+  "benefits": [
+    "Natural detox",
+    "Metabolism boost",
+    "Liver support",
+    "Weight management"
+  ],
+  "brew_temp_c": 75,
+  "brew_time_min": 3,
+  "category": "Green Tea",
+  "description": "Powerful detox blend with green tea, dandelion, and nettle. Supports natural body cleansing and metabolism.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Green tea, dandelion root, nettle leaves, lemon grass",
+  "name": "Detox Green Cleanse",
+  "original_price": 379,
+  "price": 329,
+  "rating": 4.5,
+  "reviews": 134,
+  "slug": "detox-green-cleanse",
+  "story": "A wellness-focused green tea blend designed to support your body's natural detoxification process.",
+  "variants": [
+    {
+      "id": 11,
+      "inventory_qty": 50,
+      "mrp_inr": 379,
+      "pack_size_g": 100,
+      "price_inr": 329,
+      "sku": "DGC-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01dee76ec656ce965660"
+  },
+  "benefits": [
+    "Natural energy",
+    "Mental clarity",
+    "Stamina boost",
+    "Adaptogenic herbs"
+  ],
+  "brew_temp_c": 80,
+  "brew_time_min": 4,
+  "category": "Wellness Blend",
+  "description": "Energizing wellness blend with premium ginseng, ginkgo biloba, and green tea. Natural energy without crash.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "American ginseng, ginkgo biloba, green tea, rhodiola root",
+  "name": "Ginseng Energy Boost",
+  "original_price": 499,
+  "price": 429,
+  "rating": 4.7,
+  "reviews": 189,
+  "slug": "ginseng-energy-boost",
+  "story": "Harness the power of ancient adaptogens for sustained energy and mental clarity throughout the day.",
+  "variants": [
+    {
+      "id": 12,
+      "inventory_qty": 25,
+      "mrp_inr": 499,
+      "pack_size_g": 100,
+      "price_inr": 429,
+      "sku": "GEB-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01efe76ec656ce965661"
+  },
+  "benefits": [
+    "Caffeine free",
+    "Rich minerals",
+    "Sweet vanilla taste",
+    "Safe for children"
+  ],
+  "brew_temp_c": 90,
+  "brew_time_min": 5,
+  "category": "Herbal Tea",
+  "description": "Caffeine-free South African rooibos with natural vanilla and caramel notes. Perfect evening treat for all ages.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Red rooibos, natural vanilla, caramel pieces, orange peel",
+  "name": "Rooibos Vanilla Sunset",
+  "original_price": 299,
+  "price": 259,
+  "rating": 4.6,
+  "reviews": 142,
+  "slug": "rooibos-vanilla-sunset",
+  "story": "From the red bush mountains of South Africa comes this naturally sweet and caffeine-free delight.",
+  "variants": [
+    {
+      "id": 13,
+      "inventory_qty": 55,
+      "mrp_inr": 299,
+      "pack_size_g": 100,
+      "price_inr": 259,
+      "sku": "RVS-100"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01efe76ec656ce965662"
+  },
+  "benefits": [
+    "Subtle flavor",
+    "High antioxidants",
+    "Low caffeine",
+    "Refreshing taste"
+  ],
+  "brew_temp_c": 70,
+  "brew_time_min": 2,
+  "category": "Green Tea",
+  "description": "Delicate white tea infused with sweet peach essence. Light, refreshing, and perfect for afternoon moments.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "White tea buds, natural peach flavor, peach pieces",
+  "name": "White Peach Serenity",
+  "original_price": 599,
+  "price": 549,
+  "rating": 4.9,
+  "reviews": 98,
+  "slug": "white-peach-serenity",
+  "story": "The most delicate of all teas, enhanced with the gentle sweetness of white peaches.",
+  "variants": [
+    {
+      "id": 14,
+      "inventory_qty": 20,
+      "mrp_inr": 599,
+      "pack_size_g": 50,
+      "price_inr": 549,
+      "sku": "WPS-50"
+    }
+  ]
+}
+
+{
+  "_id": {
+    "$oid": "689a01efe76ec656ce965663"
+  },
+  "benefits": [
+    "Traditional spices",
+    "Digestive aid",
+    "Warming effect",
+    "Authentic taste"
+  ],
+  "brew_temp_c": 95,
+  "brew_time_min": 5,
+  "category": "Black Tea",
+  "description": "Authentic Indian masala chai with cardamom, cinnamon, ginger, and cloves. Traditional spice blend for perfect chai.",
+  "hero_image": "/api/placeholder/600/400",
+  "image": "/api/placeholder/300/300",
+  "in_stock": true,
+  "ingredients": "Black tea, cardamom, cinnamon, ginger, cloves, black pepper",
+  "name": "Masala Chai Classic",
+  "original_price": 369,
+  "price": 319,
+  "rating": 4.8,
+  "reviews": 234,
+  "slug": "masala-chai-classic",
+  "story": "A time-honored blend of Indian spices that brings the authentic chai experience to your cup.",
+  "variants": [
+    {
+      "id": 15,
+      "inventory_qty": 60,
+      "mrp_inr": 369,
+      "pack_size_g": 100,
+      "price_inr": 319,
+      "sku": "MCC-100"
+    }
+  ]
+}

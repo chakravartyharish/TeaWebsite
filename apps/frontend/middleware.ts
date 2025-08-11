@@ -2,7 +2,7 @@ import { clerkMiddleware } from "@clerk/nextjs/server"
 
 export default clerkMiddleware((auth, req) => {
   const { pathname } = req.nextUrl
-  const protectedPrefixes = ["/", "/cart", "/checkout", "/admin"]
+  const protectedPrefixes = ["/", "/cart", "/checkout"]
   const shouldProtect = protectedPrefixes.some((p) => pathname === p || pathname.startsWith(p + "/"))
   if (shouldProtect) auth().protect()
 })

@@ -101,7 +101,7 @@ export default function AZenLanding() {
       <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-tea-forest mb-4">CALM BLEND</h2>
+            <h2 className="text-4xl font-bold text-tea-forest mb-4">Calm Ritual</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Five sacred herbs carefully selected for their unique properties to bring you peace, focus, and radiant skin.
             </p>
@@ -207,18 +207,18 @@ export default function AZenLanding() {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="flex items-center justify-center space-x-2">
                 <span className="text-2xl">📧</span>
-                <span>careinnerveda@gmail.com</span>
+                <span>innervedacare@gmail.com</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
                 <span className="text-2xl">📱</span>
-                <span>+919538571515</span>
+                <span>9113920980</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
                 <span className="text-2xl">📷</span>
-                <span>@inner.veda</span>
+                <span>@innerveda.in</span>
               </div>
             </div>
-            <p className="text-sm text-gray-600 mt-4">FSSAI: 11424999000075</p>
+            
           </div>
         </div>
       </section>

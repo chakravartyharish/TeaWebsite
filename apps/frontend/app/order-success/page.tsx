@@ -2,21 +2,31 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { getCart, getTotals, clearCart, CartItem } from '@/lib/cart';
 
 export default function OrderSuccess() {
   const [orderDetails, setOrderDetails] = useState({
     orderId: '',
     amount: 0,
-    items: [
-      { name: "A-ZEN Calm Blend", quantity: 2, price: 249 },
-      { name: "Earl Grey Supreme", quantity: 1, price: 399 }
-    ]
+    items: [] as CartItem[]
   });
 
   useEffect(() => {
-    // Generate a mock order ID
+    // Get actual cart items that were purchased
+    const cartItems = getCart();
+    const totals = getTotals(cartItems);
+    
+    // Generate a unique order ID
     const orderId = `ORD${Date.now()}`;
-    setOrderDetails(prev => ({ ...prev, orderId }));
+    
+    setOrderDetails({
+      orderId,
+      amount: totals.total,
+      items: cartItems
+    });
+
+    // Clear cart after successful order - standard e-commerce behavior
+    clearCart();
   }, []);
 
   return (
@@ -72,15 +82,17 @@ export default function OrderSuccess() {
                 {orderDetails.items.map((item, index) => (
                   <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100">
                     <div>
-                      <h3 className="font-medium">{item.name}</h3>
-                      <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
+                      <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
+                      <div className="flex justify-between items-center mt-2">
+                        <span className="text-gray-600">Qty: {item.qty}</span>
+                        <span className="font-semibold text-tea-forest">₹{item.priceInr * item.qty}</span>
+                      </div>
                     </div>
-                    <span className="font-semibold">₹{item.price * item.quantity}</span>
                   </div>
                 ))}
                 <div className="flex justify-between items-center pt-3 border-t border-gray-200">
                   <span className="text-lg font-bold">Total:</span>
-                  <span className="text-lg font-bold text-tea-forest">₹897</span>
+                  <span className="text-lg font-bold text-tea-forest">₹{orderDetails.amount}</span>
                 </div>
               </div>
             </div>
@@ -116,15 +128,15 @@ export default function OrderSuccess() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-center justify-center space-x-2">
               <span className="text-2xl">📧</span>
-              <span>careinnerveda@gmail.com</span>
+              <span>innervedacare@gmail.com</span>
             </div>
             <div className="flex items-center justify-center space-x-2">
               <span className="text-2xl">📱</span>
-              <span>+919538571515</span>
+              <span>9113920980</span>
             </div>
             <div className="flex items-center justify-center space-x-2">
               <span className="text-2xl">📷</span>
-              <span>@inner.veda</span>
+              <span>@innerveda.in</span>
             </div>
           </div>
         </div>

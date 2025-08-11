@@ -15,9 +15,8 @@ async function fetchProducts(): Promise<Product[]> {
     const isServer = typeof window === 'undefined';
     const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
     
-    const url = useMock 
-      ? (isServer ? `${SITE_URL}/api/products` : `/api/products`)
-      : `${API_BASE}/products`;
+    // Always use MongoDB API - no more mock mode
+    const url = `${API_BASE}/api/products`;
     
     const response = await fetch(url, { 
       cache: 'no-store',

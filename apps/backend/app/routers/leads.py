@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, EmailStr
-from sqlalchemy.orm import Session
-from app.core.db import get_db
+# MongoDB-only - SQLAlchemy removed
 from app.models.lead import Lead
 
 router = APIRouter(prefix="/leads", tags=["leads"])
@@ -15,7 +14,7 @@ class LeadIn(BaseModel):
     whatsapp_optin: bool = False
 
 
-def upsert_lead(db: Session, payload: LeadIn):
+def upsert_lead(payload: LeadIn):
     q = db.query(Lead)
     if payload.phone:
         q = q.filter(Lead.phone == payload.phone)
@@ -37,8 +36,6 @@ def upsert_lead(db: Session, payload: LeadIn):
 
 
 @router.post("")
-def create_or_update_lead(data: LeadIn, db: Session = Depends(get_db)):
-    lead = upsert_lead(db, data)
+def create_lead(lead: LeadIn, db: Session = Depends(get_db)):
+    lead = upsert_lead(db, lead)
     return {"id": lead.id}
-
-

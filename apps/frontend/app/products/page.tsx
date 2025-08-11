@@ -38,8 +38,11 @@ export default function ProductsPage() {
     const quantity = selectedQuantities[product.id] || 1;
     
     // Add to centralized cart
+    // Create unique numeric ID from MongoDB ObjectId string
+    const uniqueVariantId = parseInt(product.id.substring(product.id.length - 8), 16) || Date.now();
+    
     addItem({
-      variantId: parseInt(product.id) || 1, // Convert string ID to number for cart system
+      variantId: uniqueVariantId, // Use hex conversion of last 8 chars for unique number
       qty: quantity,
       name: product.name,
       priceInr: product.price,
@@ -282,7 +285,7 @@ export default function ProductsPage() {
             </div>
           ))}
         </div>
-
+)}
         {/* Featured Section */}
         <div className="mt-16 bg-gradient-to-r from-tea-forest to-green-800 rounded-3xl p-8 lg:p-12 text-white text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Why Choose Inner Veda?</h2>

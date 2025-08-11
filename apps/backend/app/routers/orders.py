@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from sqlalchemy.orm import Session
-from app.core.db import get_db
+# MongoDB-only - SQLAlchemy removed
 from app.models.cart_order import Order, OrderItem
 from app.models.product import Variant
 from decimal import Decimal
@@ -21,13 +20,20 @@ class OrderIn(BaseModel):
     notes: dict | None = None
 
 
+class OrderCreate(BaseModel):
+    user_id: int | None = None
+    items: list[OrderItemIn]
+    address_id: int | None = None
+    notes: dict | None = None
+
+
 @router.post("")
-def create_order(data: OrderIn, db: Session = Depends(get_db)):
-    if not data.items:
+def create_order(order: OrderCreate):
+    if not order.items:
         raise HTTPException(400, "No items")
     subtotal = Decimal("0.00")
-    order = Order(
-        user_id=data.user_id,
+    order_db = Order(
+        user_id=order.user_id,
         status="created",
         payment_status="pending",
         subtotal=0,

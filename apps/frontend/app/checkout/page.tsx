@@ -378,48 +378,80 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="bg-tea-cream rounded-lg p-4">
-                <h3 className="font-semibold text-tea-forest mb-3">Payment Method</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <input 
-                      type="radio" 
-                      id="razorpay" 
-                      name="payment" 
-                      value="razorpay" 
-                      checked={paymentMethod === 'razorpay'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                    />
-                    <label htmlFor="razorpay" className="text-sm font-medium">💳 Online Payment (Razorpay)</label>
+              <div className="bg-gradient-to-r from-tea-forest/10 to-green-100/50 rounded-2xl p-6 border border-tea-forest/20">
+                <h3 className="font-semibold text-tea-forest mb-6 text-lg flex items-center space-x-2">
+                  <span className="w-6 h-6 bg-tea-forest/20 rounded-full flex items-center justify-center">
+                    <span className="text-xs">💳</span>
+                  </span>
+                  <span>Payment Method</span>
+                </h3>
+                <div className="space-y-4">
+                  <div className={`p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                    paymentMethod === 'razorpay' 
+                      ? 'border-tea-forest bg-tea-forest/5' 
+                      : 'border-gray-200 bg-white hover:border-tea-forest/50'
+                  }`} onClick={() => setPaymentMethod('razorpay')}>
+                    <div className="flex items-center space-x-3">
+                      <input 
+                        type="radio" 
+                        id="razorpay" 
+                        name="payment" 
+                        value="razorpay" 
+                        checked={paymentMethod === 'razorpay'}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="text-tea-forest focus:ring-tea-forest"
+                      />
+                      <div>
+                        <label htmlFor="razorpay" className="font-medium text-gray-800 cursor-pointer flex items-center space-x-2">
+                          <span className="text-lg">💳</span>
+                          <span>Online Payment (Recommended)</span>
+                        </label>
+                        <p className="text-sm text-gray-600 mt-1">Pay securely with UPI, Cards, Net Banking, Wallets</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-600 ml-6">Pay securely with UPI, Cards, Net Banking, Wallets</p>
                   
-                  <div className="flex items-center space-x-2">
-                    <input 
-                      type="radio" 
-                      id="cod" 
-                      name="payment" 
-                      value="cod" 
-                      checked={paymentMethod === 'cod'}
-                      onChange={(e) => setPaymentMethod(e.target.value)}
-                    />
-                    <label htmlFor="cod" className="text-sm font-medium">💵 Cash on Delivery (COD)</label>
+                  <div className={`p-4 rounded-xl border-2 transition-all cursor-pointer ${
+                    paymentMethod === 'cod' 
+                      ? 'border-tea-forest bg-tea-forest/5' 
+                      : 'border-gray-200 bg-white hover:border-tea-forest/50'
+                  }`} onClick={() => setPaymentMethod('cod')}>
+                    <div className="flex items-center space-x-3">
+                      <input 
+                        type="radio" 
+                        id="cod" 
+                        name="payment" 
+                        value="cod" 
+                        checked={paymentMethod === 'cod'}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                        className="text-tea-forest focus:ring-tea-forest"
+                      />
+                      <div>
+                        <label htmlFor="cod" className="font-medium text-gray-800 cursor-pointer flex items-center space-x-2">
+                          <span className="text-lg">💵</span>
+                          <span>Cash on Delivery</span>
+                        </label>
+                        <p className="text-sm text-gray-600 mt-1">Pay when your order arrives at your doorstep</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-600 ml-6">Pay when your order arrives at your doorstep</p>
                 </div>
               </div>
 
               <button
                 type="submit"
                 disabled={isProcessing || (paymentMethod === 'razorpay' && !razorpayLoaded)}
-                className="w-full bg-tea-forest text-white py-4 rounded-lg font-semibold text-lg hover:bg-green-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-tea-forest to-green-700 text-white py-5 rounded-2xl font-bold text-lg hover:from-green-800 hover:to-green-900 transition-all duration-300 transform hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center space-x-2"
               >
-                {isProcessing 
-                  ? 'Processing...' 
-                  : paymentMethod === 'razorpay' 
-                    ? `Pay Now - ₹${total}` 
-                    : `Place Order (COD) - ₹${total}`
-                }
+                <span>
+                  {isProcessing 
+                    ? 'Processing...' 
+                    : paymentMethod === 'razorpay' 
+                      ? `🔒 Pay Securely - ₹${total}` 
+                      : `📦 Place Order (COD) - ₹${total}`
+                  }
+                </span>
+                {!isProcessing && <span>→</span>}
               </button>
               
               {paymentMethod === 'razorpay' && !razorpayLoaded && (

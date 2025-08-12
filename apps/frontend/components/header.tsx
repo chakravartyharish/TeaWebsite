@@ -1,61 +1,127 @@
+'use client'
 import { SignedIn, SignedOut, SignInButton, SignOutButton } from "@clerk/nextjs"
 import Link from "next/link"
+import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 export default function Header(){
+  const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const isActive = (path: string) => pathname === path
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-tea-forest/10 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'bg-black/95 backdrop-blur-xl border-b border-green-500/20 shadow-2xl' 
+        : 'bg-gradient-to-r from-black/80 via-gray-900/90 to-black/80 backdrop-blur-md border-b border-white/10'
+    }`}>
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-green-900/20 via-emerald-800/10 to-green-900/20 opacity-50"></div>
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14">
+          {/* Compact Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-tea-forest to-green-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-              <span className="text-white text-lg">🍃</span>
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-300 shadow-lg">
+                <span className="text-white text-lg animate-pulse">🍃</span>
+              </div>
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-green-400/20 rounded-full blur-md group-hover:bg-green-400/40 transition-all duration-300"></div>
             </div>
-            <span className="font-bold text-xl bg-gradient-to-r from-tea-forest to-green-600 bg-clip-text text-transparent">
-              INNER VEDA
-            </span>
+            <div className="hidden sm:block">
+              <span className="font-black text-xl bg-gradient-to-r from-green-400 via-emerald-300 to-green-500 bg-clip-text text-transparent group-hover:from-white group-hover:to-green-300 transition-all duration-300">
+                INNER VEDA
+              </span>
+            </div>
           </Link>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-tea-forest font-medium transition-colors duration-200 relative group">
-              Home
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-tea-forest group-hover:w-full transition-all duration-200"></span>
-            </Link>
-            <Link href="/products" className="text-gray-700 hover:text-tea-forest font-medium transition-colors duration-200 relative group">
-              Products
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-tea-forest group-hover:w-full transition-all duration-200"></span>
-            </Link>
-            <Link href="/cart" className="text-gray-700 hover:text-tea-forest font-medium transition-colors duration-200 relative group flex items-center space-x-1">
-              <span>Cart</span>
-              <span className="w-2 h-2 bg-tea-forest rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-tea-forest group-hover:w-full transition-all duration-200"></span>
-            </Link>
+          {/* Compact Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {[
+              { href: '/', label: 'Home', icon: '🏠' },
+              { href: '/products', label: 'Products', icon: '🍃' },
+              { href: '/showcase', label: 'A-ZEN', icon: '✨' },
+              { href: '/cart', label: 'Cart', icon: '🛒' }
+            ].map((item) => (
+              <Link 
+                key={item.href} 
+                href={item.href} 
+                className={`relative group px-3 py-1 rounded-full transition-all duration-300 ${
+                  isActive(item.href) 
+                    ? 'text-white bg-green-600/20 border border-green-500/30' 
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <div className="flex items-center space-x-1">
+                  <span className="text-xs group-hover:scale-110 transition-transform duration-300">{item.icon}</span>
+                  <span className="font-medium text-sm">{item.label}</span>
+                </div>
+                
+                {/* Netflix-style hover effect */}
+                <div className={`absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10`}></div>
+                
+                {/* Hover underline */}
+                <span className="absolute -bottom-0.5 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-green-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
+              </Link>
+            ))}
           </nav>
 
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-4">
+          {/* Compact Auth Buttons */}
+          <div className="flex items-center space-x-3">
             <SignedOut>
               <SignInButton mode="modal">
-                <button className="bg-tea-forest text-white px-6 py-2 rounded-full font-medium hover:bg-green-800 transition-all duration-200 transform hover:scale-105 shadow-md">
-                  Sign In
+                <button className="relative group bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/25 overflow-hidden">
+                  {/* Button glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  
+                  {/* Button content */}
+                  <div className="relative flex items-center space-x-1">
+                    <span className="text-xs">✨</span>
+                    <span>Sign In</span>
+                  </div>
+                  
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
                 </button>
               </SignInButton>
             </SignedOut>
+            
             <SignedIn>
               <SignOutButton redirectUrl="/">
-                <button className="text-gray-700 hover:text-tea-forest font-medium transition-colors duration-200 px-4 py-2 border border-gray-200 rounded-full hover:border-tea-forest">
-                  Sign Out
+                <button className="relative group text-gray-300 hover:text-white font-medium transition-all duration-300 px-4 py-2 border border-gray-600 hover:border-green-500 rounded-full hover:bg-green-500/10 overflow-hidden text-sm">
+                  {/* Button content */}
+                  <div className="relative flex items-center space-x-1">
+                    <span className="text-xs">👋</span>
+                    <span>Sign Out</span>
+                  </div>
+                  
+                  {/* Hover background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-green-600/0 to-green-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               </SignOutButton>
             </SignedIn>
 
-            {/* Mobile Menu Button */}
-            <button className="md:hidden w-8 h-8 flex items-center justify-center">
-              <div className="w-5 h-0.5 bg-gray-600 relative">
-                <span className="absolute -top-1.5 left-0 w-5 h-0.5 bg-gray-600"></span>
-                <span className="absolute top-1.5 left-0 w-5 h-0.5 bg-gray-600"></span>
+            {/* Compact Mobile Menu Button */}
+            <button className="md:hidden relative group w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 hover:bg-green-600/20 transition-all duration-300">
+              <div className="relative">
+                <div className="w-4 h-0.5 bg-gray-300 group-hover:bg-green-400 transition-colors duration-300 relative">
+                  <span className="absolute -top-1.5 left-0 w-4 h-0.5 bg-gray-300 group-hover:bg-green-400 transition-colors duration-300"></span>
+                  <span className="absolute top-1.5 left-0 w-4 h-0.5 bg-gray-300 group-hover:bg-green-400 transition-colors duration-300"></span>
+                </div>
               </div>
+              
+              {/* Mobile button glow */}
+              <div className="absolute inset-0 bg-green-400/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>

@@ -38,9 +38,9 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="h-screen overflow-hidden bg-black text-white">
       {/* Netflix-style Hero Section */}
-      <div className="relative">
+      <div className="relative h-full">
         {/* Background with animated gradient */}
         <div className={`absolute inset-0 bg-gradient-to-br ${heroSlides[currentSlide].bgGradient} transition-all duration-1000`}>
           {/* Animated tea leaves pattern */}
@@ -67,7 +67,7 @@ export default function SignUpPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80"></div>
 
         {/* Content Grid */}
-        <div className="relative min-h-screen grid lg:grid-cols-2">
+        <div className="relative h-full grid lg:grid-cols-2">
           {/* Left Side - Hero Content */}
           <div className="flex items-center justify-center p-8 lg:p-16">
             <div className="max-w-lg text-center lg:text-left">
@@ -140,7 +140,6 @@ export default function SignUpPage() {
                     appearance={{
                       variables: {
                         colorPrimary: '#10b981', // emerald-500
-                        colorPrimaryText: '#ffffff',
                         colorBackground: 'transparent',
                         colorInputBackground: '#1f2937', // gray-800
                         colorInputText: '#f9fafb', // gray-50
@@ -170,6 +169,9 @@ export default function SignUpPage() {
                           '&:hover': {
                             backgroundColor: '#374151',
                           }
+                        },
+                        socialButtonsProviderIcon__apple: {
+                          filter: 'brightness(0) invert(1)', // Makes Apple icon white
                         },
                         formButtonPrimary: {
                           backgroundColor: '#10b981',

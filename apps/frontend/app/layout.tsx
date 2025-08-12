@@ -15,8 +15,8 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     setIsClient(true)
   }, [])
   
-  // Check if current path should have custom layout (auth pages)
-  const isAuthPage = pathname?.startsWith('/sign-in') || pathname?.startsWith('/sign-up')
+  // Check if current path should have custom layout (auth pages and homepage)
+  const isAuthPage = pathname === '/' || pathname?.startsWith('/sign-in') || pathname?.startsWith('/sign-up')
   
   if (!isClient) {
     return <div className="min-h-screen bg-black">{children}</div>

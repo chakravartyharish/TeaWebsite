@@ -148,74 +148,105 @@ export default function FAQ() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-tea-cream to-green-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      {/* Netflix-style background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, #dc2626 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, #059669 0%, transparent 50%),
+                           radial-gradient(circle at 50% 50%, #7c3aed 0%, transparent 50%)`
+        }}></div>
+      </div>
+
+      <div className="relative max-w-6xl mx-auto px-4 py-12">
         
-        {/* Page Header */}
+        {/* Header Section */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-tea-forest/10 rounded-full px-6 py-3 mb-6">
-            <span className="text-2xl">❓</span>
-            <span className="text-sm font-bold text-tea-forest uppercase tracking-wide">SUPPORT CENTER</span>
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-600 to-red-700 rounded-full mb-6 shadow-2xl shadow-red-500/25">
+            <span className="text-4xl text-white">❓</span>
           </div>
           
-          <h1 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-tea-forest to-green-600 bg-clip-text text-transparent mb-6">
-            Frequently Asked Questions
+          <h1 className="text-6xl font-black text-white mb-6 tracking-tight">
+            <span className="bg-gradient-to-r from-red-500 via-white to-red-400 bg-clip-text text-transparent">
+              FAQ
+            </span>
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Everything you need to know about A-ZEN, Inner Veda, and your wellness journey. 
-            Can't find your answer? We're here to help!
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Everything you need to know about A-ZEN, our premium Ayurvedic tea blend, 
+            and your wellness journey with Inner Veda.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-4 gap-8">
-          
-          {/* Category Filter Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-tea-forest/10 p-6 sticky top-24">
-              <h3 className="text-lg font-bold text-tea-forest mb-6">Browse by Category</h3>
-              <div className="space-y-2">
-                {categories.map(category => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
-                      selectedCategory === category.id
-                        ? 'bg-tea-forest text-white shadow-lg'
-                        : 'hover:bg-tea-forest/10 text-gray-700 hover:text-tea-forest'
-                    }`}
-                  >
-                    <span className="text-lg">{category.icon}</span>
-                    <span className="font-medium">{category.name}</span>
-                    <span className="ml-auto text-xs bg-white/20 px-2 py-1 rounded-full">
-                      {category.id === 'all' ? faqData.length : faqData.filter(faq => faq.category === category.id).length}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
+        {/* Category Filter */}
+        <div className="mb-12">
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 ${
+                  selectedCategory === category.id
+                    ? 'bg-red-600 text-white shadow-lg shadow-red-500/25 border border-red-500'
+                    : 'bg-gray-800/80 backdrop-blur-sm text-gray-300 hover:bg-gray-700 border border-gray-700 hover:border-gray-600'
+                }`}
+              >
+                <span className="text-lg">{category.icon}</span>
+                <span>{category.name}</span>
+              </button>
+            ))}
           </div>
+        </div>
 
-          {/* FAQ Content */}
-          <div className="lg:col-span-3">
+        {/* FAQ Items */}
+        <div className="space-y-6">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white mb-2">
+              {categories.find(cat => cat.id === selectedCategory)?.name || 'All Questions'}
+            </h2>
+            <p className="text-gray-400">
+              {filteredFAQs.length} question{filteredFAQs.length !== 1 ? 's' : ''} found
+            </p>
+          </div>
+          
+          <div className="grid gap-4">
             <div className="space-y-4">
-              {filteredFAQs.map((item) => (
+              {filteredFAQs.map((item, index) => (
                 <div 
                   key={item.id} 
-                  className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-tea-forest/10 overflow-hidden hover:shadow-lg transition-all duration-300"
+                  className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700 hover:border-gray-600 transition-all duration-300 hover:shadow-xl hover:shadow-red-500/10 group"
+                  style={{
+                    animationDelay: `${index * 50}ms`
+                  }}
                 >
                   <button
                     onClick={() => toggleItem(item.id)}
-                    className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-tea-forest/5 transition-colors"
+                    className="w-full text-left p-6 focus:outline-none focus:ring-4 focus:ring-red-500/20 rounded-xl group"
                   >
-                    <div className="flex items-center space-x-4">
-                      <div className="w-10 h-10 bg-gradient-to-br from-tea-forest to-green-600 rounded-full flex items-center justify-center">
-                        <span className="text-white">{item.icon}</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 flex-1">
+                        <div className="w-12 h-12 bg-gradient-to-r from-red-600/20 to-red-500/20 rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300 border border-red-500/30">
+                          {item.icon}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-white group-hover:text-red-400 transition-colors duration-300">
+                            {item.question}
+                          </h3>
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-xs bg-red-600/20 text-red-400 px-2 py-1 rounded-full font-medium border border-red-500/30">
+                              {categories.find(cat => cat.id === item.category)?.name}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 pr-4">{item.question}</h3>
-                    </div>
-                    <div className={`transform transition-transform duration-200 ${openItem === item.id ? 'rotate-180' : ''}`}>
-                      <svg className="w-5 h-5 text-tea-forest" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${
+                          openItem === item.id ? 'rotate-180 text-red-400' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
@@ -224,8 +255,8 @@ export default function FAQ() {
                   {openItem === item.id && (
                     <div className="px-6 pb-6">
                       <div className="pl-14 pr-4">
-                        <div className="bg-gradient-to-r from-tea-forest/10 to-green-100/50 rounded-xl p-4 border border-tea-forest/20">
-                          <p className="text-gray-700 leading-relaxed whitespace-pre-line">{item.answer}</p>
+                        <div className="bg-gradient-to-r from-gray-700/50 to-gray-800/50 rounded-xl p-4 border border-gray-600/50">
+                          <p className="text-gray-300 leading-relaxed whitespace-pre-line">{item.answer}</p>
                         </div>
                       </div>
                     </div>
@@ -237,43 +268,43 @@ export default function FAQ() {
         </div>
 
         {/* Contact CTA Section */}
-        <div className="mt-16 bg-gradient-to-r from-tea-forest via-green-700 to-green-800 rounded-3xl p-8 lg:p-12 text-white text-center shadow-2xl">
+        <div className="mt-16 bg-gradient-to-r from-red-900/80 via-gray-900 to-red-900/80 rounded-3xl p-8 lg:p-12 text-white text-center shadow-2xl shadow-red-500/10 border border-red-500/20">
           <div className="max-w-3xl mx-auto">
-            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-red-600/30 rounded-full flex items-center justify-center mx-auto mb-6 border border-red-500/50">
               <span className="text-3xl">🤝</span>
             </div>
             
-            <h2 className="text-3xl font-bold mb-4">Still Have Questions?</h2>
-            <p className="text-tea-cream text-lg mb-8 leading-relaxed">
+            <h2 className="text-3xl font-bold mb-4 text-white">Still Have Questions?</h2>
+            <p className="text-gray-300 text-lg mb-8 leading-relaxed">
               Our wellness experts are here to help! Get personalized advice about A-ZEN, 
               your wellness journey, or any concerns you might have.
             </p>
             
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <a href="mailto:innervedacare@gmail.com" className="group bg-white/10 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
+              <a href="mailto:innervedacare@gmail.com" className="group bg-gray-800/50 rounded-2xl p-6 hover:bg-gray-700/50 transition-all duration-300 hover:-translate-y-1 border border-gray-700 hover:border-red-500/50">
                 <div className="text-3xl mb-3">📧</div>
-                <h3 className="font-bold mb-2">Email Us</h3>
-                <p className="text-tea-cream text-sm">innervedacare@gmail.com</p>
+                <h3 className="font-bold mb-2 text-white">Email Us</h3>
+                <p className="text-gray-300 text-sm">innervedacare@gmail.com</p>
               </a>
               
-              <a href="tel:9113920980" className="group bg-white/10 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
+              <a href="tel:9113920980" className="group bg-gray-800/50 rounded-2xl p-6 hover:bg-gray-700/50 transition-all duration-300 hover:-translate-y-1 border border-gray-700 hover:border-red-500/50">
                 <div className="text-3xl mb-3">📱</div>
-                <h3 className="font-bold mb-2">Call Us</h3>
-                <p className="text-tea-cream text-sm">9113920980</p>
+                <h3 className="font-bold mb-2 text-white">Call Us</h3>
+                <p className="text-gray-300 text-sm">9113920980</p>
               </a>
               
-              <a href="https://instagram.com/innerveda.in" className="group bg-white/10 rounded-2xl p-6 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1">
+              <a href="https://instagram.com/innerveda.in" className="group bg-gray-800/50 rounded-2xl p-6 hover:bg-gray-700/50 transition-all duration-300 hover:-translate-y-1 border border-gray-700 hover:border-red-500/50">
                 <div className="text-3xl mb-3">📷</div>
-                <h3 className="font-bold mb-2">Follow Us</h3>
-                <p className="text-tea-cream text-sm">@innerveda.in</p>
+                <h3 className="font-bold mb-2 text-white">Follow Us</h3>
+                <p className="text-gray-300 text-sm">@innerveda.in</p>
               </a>
             </div>
             
             <div className="text-center">
-              <p className="text-tea-cream mb-4">
-                <span className="font-semibold">Contact Person:</span> Sonam Garg
+              <p className="text-gray-300 mb-4">
+                <span className="font-semibold text-white">Contact Person:</span> Sonam Garg
               </p>
-              <p className="text-tea-cream text-sm">
+              <p className="text-gray-400 text-sm">
                 Available Mon-Sat, 9 AM - 7 PM IST
               </p>
             </div>
@@ -283,13 +314,13 @@ export default function FAQ() {
         {/* Related Links */}
         <div className="mt-12 text-center">
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="bg-white/80 backdrop-blur-sm text-tea-forest px-6 py-3 rounded-full font-medium hover:bg-white hover:shadow-lg transition-all duration-300">
+            <Link href="/contact" className="bg-gray-800/80 backdrop-blur-sm text-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-700 hover:text-white hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 border border-gray-700 hover:border-red-500/50">
               Contact Support
             </Link>
-            <Link href="/terms" className="bg-white/80 backdrop-blur-sm text-tea-forest px-6 py-3 rounded-full font-medium hover:bg-white hover:shadow-lg transition-all duration-300">
+            <Link href="/terms" className="bg-gray-800/80 backdrop-blur-sm text-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-700 hover:text-white hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 border border-gray-700 hover:border-red-500/50">
               Terms of Service
             </Link>
-            <Link href="/privacy" className="bg-white/80 backdrop-blur-sm text-tea-forest px-6 py-3 rounded-full font-medium hover:bg-white hover:shadow-lg transition-all duration-300">
+            <Link href="/privacy" className="bg-gray-800/80 backdrop-blur-sm text-gray-300 px-6 py-3 rounded-full font-medium hover:bg-gray-700 hover:text-white hover:shadow-lg hover:shadow-red-500/20 transition-all duration-300 border border-gray-700 hover:border-red-500/50">
               Privacy Policy
             </Link>
           </div>

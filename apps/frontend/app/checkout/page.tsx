@@ -163,7 +163,7 @@ export default function Checkout() {
     
     // Simulate COD order processing
     setTimeout(() => {
-      alert('🎉 Order placed successfully with Cash on Delivery! You will receive a confirmation call shortly.');
+      // alert('🎉 Order placed successfully with Cash on Delivery! You will receive a confirmation call shortly.');
       setIsProcessing(false);
       // Here you would typically save the order and redirect
       window.location.href = '/order-success';

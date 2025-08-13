@@ -73,10 +73,10 @@ export default function Chatbot(){
           <div className="relative">
             {isLoading ? (
               <div className="animate-spin">
-                <span className="text-2xl">🤖</span>
+                <span className="text-2xl">🍃</span>
               </div>
             ) : (
-              <span className="text-2xl group-hover:scale-110 transition-transform">{open ? '💬' : '🤖'}</span>
+              <span className="text-2xl group-hover:scale-110 transition-transform">{open ? '💬' : '🍃'}</span>
             )}
             {!open && messages.length > 0 && (
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-netflix-red rounded-full animate-pulse"></div>
@@ -100,7 +100,7 @@ export default function Chatbot(){
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-netflix-red/20 border border-netflix-red/40 rounded-lg flex items-center justify-center">
-                  <span className="text-xl">🤖</span>
+                  <span className="text-xl">🍃</span>
                 </div>
                 <div className="text-netflix-white">
                   <h3 className="font-bold text-lg">AI Assistant</h3>
@@ -137,7 +137,7 @@ export default function Chatbot(){
                     <div className="bg-netflix-gray/80 backdrop-blur-sm p-4 rounded-2xl shadow-lg border border-netflix-red/20">
                       <div className="flex items-center space-x-3 mb-3">
                         <div className="w-8 h-8 bg-netflix-red/20 border border-netflix-red/40 rounded-lg flex items-center justify-center">
-                          <span className="text-netflix-text text-sm">🤖</span>
+                          <span className="text-netflix-text text-sm">🍃</span>
                         </div>
                         <span className="font-semibold text-netflix-white">Welcome to Inner Veda AI!</span>
                       </div>
@@ -280,7 +280,7 @@ export default function Chatbot(){
                   <span className="flex items-center space-x-1">
                     <span>Powered by</span>
                     <span className="text-netflix-red font-semibold">Inner Veda AI</span>
-                    <span>🤖</span>
+                    <span>🍃</span>
                   </span>
                 </div>
               </div>

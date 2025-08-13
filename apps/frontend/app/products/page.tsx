@@ -80,6 +80,22 @@ export default function ProductsPage() {
     return cart.reduce((total, item) => total + item.qty, 0);
   };
 
+  // Scroll to products section
+  const scrollToProducts = () => {
+    const productsSection = document.getElementById('products-section');
+    if (productsSection) {
+      productsSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  // Navigate to showcase page
+  const navigateToShowcase = () => {
+    window.location.href = '/showcase';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
       {/* Header */}
@@ -175,11 +191,17 @@ export default function ProductsPage() {
                 Discover our handcrafted selection of premium teas, each carefully sourced and blended for the perfect experience.
               </p>
               <div className="flex space-x-4">
-                <button className="bg-white text-black px-8 py-3 rounded-sm font-semibold hover:bg-gray-200 transition-all duration-300 flex items-center space-x-2">
+                <button 
+                  onClick={scrollToProducts}
+                  className="bg-white text-black px-8 py-3 rounded-sm font-semibold hover:bg-gray-200 transition-all duration-300 flex items-center space-x-2"
+                >
                   <span>▶</span>
                   <span>Shop Now</span>
                 </button>
-                <button className="bg-gray-600/60 text-white px-8 py-3 rounded-sm font-semibold hover:bg-gray-600/80 transition-all duration-300 backdrop-blur-sm">
+                <button 
+                  onClick={navigateToShowcase}
+                  className="bg-gray-600/60 text-white px-8 py-3 rounded-sm font-semibold hover:bg-gray-600/80 transition-all duration-300 backdrop-blur-sm"
+                >
                   Learn More
                 </button>
               </div>
@@ -230,7 +252,7 @@ export default function ProductsPage() {
         )}
 
         {/* Section Title */}
-        <div className="mb-8">
+        <div id="products-section" className="mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Popular on Inner Veda</h2>
           <p className="text-gray-400">Premium teas loved by our customers</p>
         </div>

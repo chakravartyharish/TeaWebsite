@@ -1,16 +1,7 @@
 const useMock = (process.env.NEXT_PUBLIC_USE_MOCK === '1' || process.env.NEXT_PUBLIC_USE_MOCK === 'true');
 const isServer = typeof window === 'undefined'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-
-// Production API URL - Heroku backend
-const PRODUCTION_API_URL = process.env.NEXT_PUBLIC_API_URL || "https://innerveda-tea-api.herokuapp.com";
-const DEVELOPMENT_API_URL = "http://localhost:8000";
-
-// Use production API in production, development API in development
-export const API_BASE = useMock ? '' : (
-  process.env.NODE_ENV === 'production' ? PRODUCTION_API_URL : 
-  (process.env.NEXT_PUBLIC_API_BASE || DEVELOPMENT_API_URL)
-);
+export const API_BASE = useMock ? '' : (process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000");
 
 function toUrl(path: string) {
   // Special handling for frontend API routes - always use frontend API route

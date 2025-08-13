@@ -5,26 +5,17 @@ import Chatbot from "@/components/chatbot-widget";
 import ErrorBoundary from "@/components/error-boundary";
 import ErrorSuppression from "@/components/error-suppression";
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { useUser } from '@clerk/nextjs'
 
 export default function LayoutContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const [isClient, setIsClient] = useState(false)
   const { user, isLoaded } = useUser()
-  
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
   
   // Check if current path should have custom layout (auth pages and homepage sign-in)
   const isAuthPage = pathname?.startsWith('/sign-in') || pathname?.startsWith('/sign-up')
   const isHomePageSignIn = pathname === '/' && isLoaded && !user
   
-  if (!isClient) {
-    return <div className="min-h-screen bg-black">{children}</div>
-  }
-  
+  // Use consistent rendering - avoid hydration mismatch by not using isClient
   if (isAuthPage || isHomePageSignIn) {
     return (
       <div className="min-h-screen bg-black text-white">
@@ -32,7 +23,6 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
       </div>
     )
   }
-  
   
   return (
     <ErrorBoundary>

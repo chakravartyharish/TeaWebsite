@@ -9,7 +9,6 @@ export default function HomePage() {
   const { user, isLoaded } = useUser()
   const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isClient, setIsClient] = useState(false)
 
   const heroSlides = [
     {
@@ -30,7 +29,6 @@ export default function HomePage() {
   ]
 
   useEffect(() => {
-    setIsClient(true)
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
     }, 4000)
@@ -44,8 +42,13 @@ export default function HomePage() {
     }
   }, [user, isLoaded, router])
 
-  if (!isClient || !isLoaded) {
-    return <div className="min-h-screen bg-black"></div>
+  // Show loading state while Clerk is loading
+  if (!isLoaded) {
+    return <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="w-16 h-16 mx-auto bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center animate-pulse">
+        <span className="text-white text-2xl">🍃</span>
+      </div>
+    </div>
   }
 
   // If user is authenticated, show loading while redirecting

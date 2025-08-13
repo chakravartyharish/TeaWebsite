@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
@@ -14,12 +15,25 @@ async def lifespan(app: FastAPI):
     # Shutdown
     await close_mongo_connection()
 
-app = FastAPI(title="Tea Store API", lifespan=lifespan)
+app = FastAPI(title="Inner Veda Tea Store API", lifespan=lifespan)
+
+# Production CORS configuration
+allowed_origins = [
+    "https://innerveda.netlify.app",
+    "https://innerveda.in", 
+    "https://www.innerveda.in",
+    "http://localhost:3000",  # For development
+]
+
+# Use environment variable for allowed origins in production
+if os.getenv("ALLOWED_ORIGINS"):
+    allowed_origins = os.getenv("ALLOWED_ORIGINS").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -31,5 +45,9 @@ app.include_router(webhooks.router)
 
 @app.get("/")
 def root():
-    return {"status": "ok"}
+    return {"status": "ok", "message": "Inner Veda Tea Store API is running"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "service": "Inner Veda Tea Store API"}
 

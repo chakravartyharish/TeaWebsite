@@ -37,20 +37,25 @@ cd apps/backend
 pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
-# Frontend linting
+# Frontend linting and building
 cd apps/frontend
 npm run lint
-
-# Frontend build
-cd apps/frontend
 npm run build
+
+# Backend database management
+cd apps/backend
+python -m app.scripts.setup_atlas  # Setup/reset MongoDB Atlas data
+python -m app.scripts.seed         # Seed database with sample data (local only)
 ```
 
 ### Environment Setup
 ```bash
-# Copy environment templates
+# Copy environment templates (required before first run)
 cp apps/backend/.env.example apps/backend/.env
 cp apps/frontend/.env.local.example apps/frontend/.env.local
+
+# Windows users can use:
+scripts/windows/prepare-envs.bat
 ```
 
 ## Key Architecture Details
@@ -81,11 +86,21 @@ The application is currently migrating from SQLite/PostgreSQL to MongoDB Atlas:
 - **Notifications**: WhatsApp integration planned
 - **AI**: OpenAI chatbot integration
 
+### Critical Migration State
+**⚠️ Active Database Migration**: The app is transitioning from PostgreSQL to MongoDB Atlas:
+- Docker Compose still includes unused PostgreSQL service  
+- Many backend routers are disabled (auth, payments, orders, etc.)
+- Only `mongo_products`, `ai`, and `webhooks` routers are active
+- Frontend authentication via Clerk is functional but backend auth is disabled
+
 ### Development Notes
 - MongoDB Atlas setup guide available in `MONGODB_ATLAS_SETUP.md`
-- Windows-specific scripts available in `scripts/windows/`
-- TODO blocks throughout codebase mark incomplete integrations
-- Frontend uses Clerk for authentication, backend has auth system disabled during migration
+- Windows-specific scripts available in `scripts/windows/` (setup, run, docker commands)
+- TODO blocks throughout codebase mark incomplete integrations (Razorpay webhooks, Shiprocket API calls)
+- Use `make up` and `make seed` commands for Docker development
+- No test framework currently configured
+- Frontend uses TypeScript strict mode and ESLint with Next.js config
+- Backend uses FastAPI with async/await patterns and Beanie ODM
 
 ### Service URLs
 - Frontend: http://localhost:3000

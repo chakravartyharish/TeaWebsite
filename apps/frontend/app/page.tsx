@@ -267,7 +267,7 @@ export default function HomePage() {
                 
                 {/* A-ZEN Title */}
                 <div className="space-y-3">
-                  <h2 className="text-8xl font-black text-white leading-none tracking-tight">
+                  <h2 className="text-6xl font-black text-red-600 leading-none tracking-tight">
                     A-ZEN
                   </h2>
                   <div className="h-1 w-32 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full"></div>
@@ -275,7 +275,7 @@ export default function HomePage() {
                 
                 {/* Product Benefits */}
                 <div className="space-y-4">
-                  <h3 className="text-3xl font-bold text-white/90 leading-tight">
+                  <h3 className="text-2xl font-bold text-white/70 leading-tight">
                     CALM & FOCUSED MIND + RADIANT SKIN
                   </h3>
                   <p className="text-xl text-gray-300 font-medium">

@@ -26,16 +26,6 @@ export default function CartPage(){
 
         {items.length === 0 ? (
           <div className="text-center py-20">
-            <div className="relative mb-8">
-              <div className="w-32 h-32 mx-auto bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center border border-gray-700">
-                <svg className="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-              </div>
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">0</span>
-              </div>
-            </div>
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">Your cart is empty</h2>
             <p className="text-gray-400 text-lg mb-12 max-w-md mx-auto">Start adding some premium tea products to your cart and enjoy our wellness collection</p>
             <Link 
